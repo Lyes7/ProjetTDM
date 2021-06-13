@@ -39,8 +39,6 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() {
     }
 
 
-
-
     override fun getItemCount(): Int {
         return dataSet.size
     }
@@ -64,11 +62,6 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() {
         })
     }
 
-<<<<<<< HEAD
-    
-=======
 
-
->>>>>>> cc29279ae8b95068994c35f75abafb7f187addd6
 
 }
