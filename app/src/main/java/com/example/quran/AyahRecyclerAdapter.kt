@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quran.Models.Racine
 import com.example.quran.Models.Verset
@@ -37,7 +38,21 @@ class AyahRecyclerAdapter(val racine: Racine): RecyclerView.Adapter<AyahRecycler
     override fun onBindViewHolder(holder: AyahRecyclerAdapter.ViewHolder, position: Int) {
         holder.title.text = "سورة البقرة"
         holder.ayah.text = dataSet[position].TextVersetArabe
-        //var a= argume
+        holder.itemView.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val activity = v!!.context as AppCompatActivity
+
+                val detailFragment = DetailVerset(dataSet[position])
+
+
+                activity.supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.flFragment,  detailFragment)
+                    addToBackStack(null)
+                    commit()
+                }
+            }
+        })
+
     }
 
 

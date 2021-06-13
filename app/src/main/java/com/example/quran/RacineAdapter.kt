@@ -53,8 +53,6 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() , Filterabl
     }
 
 
-
-
     override fun getItemCount(): Int {
         return countryFilterList.size
     }
@@ -77,6 +75,7 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() , Filterabl
             }
         })
     }
+
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -106,6 +105,7 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() , Filterabl
 
         }
     }
+
 
 
 }
