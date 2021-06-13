@@ -1,6 +1,17 @@
 package com.example.quran.Models
 
-class Racine (val id:Int ,val racine:String ,val listVerset : List<Verset>){
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 
 
-}
+@Entity ()
+    //foreignKeys = [ForeignKey(entity = Verset::class,parentColumns = ["verset"], childColumns = ["verset"])])
+data class Racine (
+    @PrimaryKey()
+    val idRacine:Int
+    ,val Racine:String
+    ,val NBLettre: Int
+
+)
+

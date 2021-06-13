@@ -10,32 +10,33 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quran.Models.Racine
 import com.example.quran.Models.Verset
-import java.util.*
 import kotlin.collections.ArrayList
 
-class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() , Filterable {
+class RacineAdapter(var msg: List<Racine>):RecyclerView.Adapter<RacineAdapter.ViewHolder>() , Filterable {
+
 
     var countryFilterList = ArrayList<Racine>()
 
+    /*
+    arrayOf(
+    Verset(0,2,2,"eng",125,15),
+    Verset(0,2,2,"eng",125,15)
+    ).toList() */
 
-    private  var dataSet = arrayListOf(
-        Racine(22,
-            "الم",
-            arrayOf(
-                Verset(0,"ee","eng",125,15,23,15),
-                Verset(5,"hghgh","eygqng",125,15,23,15)
-            ).toList()
-        ),
-        Racine(23,
-            "سقي",
-            arrayOf(
-                Verset(0,"ejjjjjjjjjjjjjjjj","eng",125,15,23,15),
-                Verset(5,"hghgh","eygqng",125,15,23,15)
-            ).toList()
-        )
+/*
+arrayListOf(
+        Racine(22,"الم",2),
+        Racine(23,"سقي",2)
     )
 
+ */
+
+    private  var dataSet= arrayListOf<Racine>()
+
+
+
     init {
+        dataSet.addAll(msg)
         countryFilterList = dataSet
     }
 
@@ -59,7 +60,7 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() , Filterabl
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.text = countryFilterList[position].racine
+        holder.title.text = countryFilterList[position].Racine
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val activity = v!!.context as AppCompatActivity
@@ -86,7 +87,7 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() , Filterabl
                 } else {
                     val resultList = ArrayList<Racine>()
                     for (row in dataSet) {
-                            if (row.racine.contains(charSearch)) {
+                            if (row.Racine.contains(charSearch)) {
                             resultList.add(row)
                         }
                     }

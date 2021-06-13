@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.quran.DAOs.RacineDao
+import com.example.quran.DataBase.AppDataBase
 import com.example.quran.Models.Racine
 import kotlinx.android.synthetic.main.fragment_rv_racine.*
 
-class RvRacineFragment : Fragment(R.layout.fragment_rv_racine){
+class RvRacineFragment(var msg: List<Racine>) : Fragment(R.layout.fragment_rv_racine){
 
 
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -24,13 +27,18 @@ class RvRacineFragment : Fragment(R.layout.fragment_rv_racine){
         super.onViewCreated(view, savedInstanceState)
 
 
+
         layoutManager = LinearLayoutManager(requireContext())
 
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_racine)
+        val  tv = view?.findViewById<TextView>(R.id.tvtest)
+
+        //tv.text = msg
+
         recyclerView?.layoutManager = this.layoutManager
 
-        adapter = RacineAdapter()
+        adapter = RacineAdapter(msg)
 
 
 

@@ -20,6 +20,12 @@
         android:textCursorDrawable="@null"
         app:iconifiedByDefault="false"
         app:queryBackground="@null" />
+    <TextView
+        android:id="@+id/tvtest"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="yaaaw"
+        android:textSize="20sp"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
