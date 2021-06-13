@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.quran.Models.Racine
 
-class MainActivity : AppCompatActivity(), Communicator{
+class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         this.getSupportActionBar()?.hide()
         setContentView(R.layout.activity_main)
@@ -22,8 +23,5 @@ class MainActivity : AppCompatActivity(), Communicator{
 
     }
 
-    override fun passDataCom(obj: Racine) {
-        var bundle = Bundle()
-        bundle.putString("msg", "Hi yaw")
-    }
+
 }

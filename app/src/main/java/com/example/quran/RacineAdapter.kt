@@ -3,14 +3,22 @@ package com.example.quran
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quran.Models.Racine
 import com.example.quran.Models.Verset
+import java.util.*
+import kotlin.collections.ArrayList
 
-class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() {
-    private  var dataSet = arrayOf(
+class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() , Filterable {
+
+    var countryFilterList = ArrayList<Racine>()
+
+
+    private  var dataSet = arrayListOf(
         Racine(22,
             "الم",
             arrayOf(
@@ -26,6 +34,12 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() {
             ).toList()
         )
     )
+
+    init {
+        countryFilterList = dataSet
+    }
+
+
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         //var id: TextView = itemView.findViewById(R.id.SuraName)
         var title: TextView = itemView.findViewById(R.id.Abc)
@@ -42,17 +56,17 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() {
 
 
     override fun getItemCount(): Int {
-        return dataSet.size
+        return countryFilterList.size
     }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.text = dataSet[position].racine
+        holder.title.text = countryFilterList[position].racine
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val activity = v!!.context as AppCompatActivity
 
-                val ayaFragment = RvAyaFragment(dataSet[position])
+                val ayaFragment = RvAyaFragment(countryFilterList[position])
               
 
                 activity.supportFragmentManager.beginTransaction().apply {
@@ -64,11 +78,34 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() {
         })
     }
 
-<<<<<<< HEAD
-    
-=======
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    countryFilterList = dataSet
+                } else {
+                    val resultList = ArrayList<Racine>()
+                    for (row in dataSet) {
+                            if (row.racine.contains(charSearch)) {
+                            resultList.add(row)
+                        }
+                    }
+                    countryFilterList = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = countryFilterList
+                return filterResults
+            }
 
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                countryFilterList = results?.values as ArrayList<Racine>
+                notifyDataSetChanged()
+            }
 
->>>>>>> cc29279ae8b95068994c35f75abafb7f187addd6
+        }
+    }
+
 
 }

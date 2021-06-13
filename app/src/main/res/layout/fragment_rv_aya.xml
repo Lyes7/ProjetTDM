@@ -8,20 +8,6 @@
     tools:context=".RvAyaFragment">
 
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Chercher.."
-        android:inputType="textPersonName"
-        android:paddingTop="15dp"
-
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/rv_aya"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_aya"
