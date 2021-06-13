@@ -49,4 +49,6 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() {
         holder.title.text = dataSet[position].racine
     }
 
+    
+
 }
