@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CardView"
+    android:layout_margin="5dp"
+    android:layout_marginBottom="3dp"
+    app:cardBackgroundColor="#81c784"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="3dp"
+    app:contentPadding="1dp"
+    >
+
+    <TextView
+        android:id="@+id/Abc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hellow World"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp">
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
