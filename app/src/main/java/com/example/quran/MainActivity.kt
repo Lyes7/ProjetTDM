@@ -2,11 +2,9 @@ package com.example.quran
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_rv_aya.*
+import com.example.quran.Models.Racine
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Communicator{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,13 +12,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val racineFragment = RvRacineFragment()
-        val ayaFragment = RvAyaFragment()
+        //val ayaFragment = RvAyaFragment()
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment,  racineFragment)
-            addToBackStack(null)
+            //addToBackStack(null)
             commit()
         }
 
+    }
+
+    override fun passDataCom(obj: Racine) {
+        var bundle = Bundle()
+        bundle.putString("msg", "Hi yaw")
     }
 }

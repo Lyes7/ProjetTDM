@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
+<<<<<<< HEAD
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.*
 import java.util.Locale.filter
+=======
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.quran.Models.Racine
+>>>>>>> cc29279ae8b95068994c35f75abafb7f187addd6
 
-class RvAyaFragment : Fragment(R.layout.fragment_rv_aya) {
-
+class RvAyaFragment(private val racine: Racine) : Fragment(R.layout.fragment_rv_aya) {
 
     //var editText = view?.findViewById<EditText>(R.id.edited_text)
 
@@ -50,10 +54,10 @@ class RvAyaFragment : Fragment(R.layout.fragment_rv_aya) {
         recyclerView?.layoutManager = this.layoutManager
 
 
-        adapter = AyahRecyclerAdapter()
+        adapter = AyahRecyclerAdapter(racine)
 
         recyclerView?.adapter = this.adapter
-
+        //var a = arguments?.get("msg")
 
     }
 

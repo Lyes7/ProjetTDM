@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quran.Models.Racine
 import com.example.quran.Models.Verset
@@ -20,7 +21,7 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() {
         Racine(23,
             "سقي",
             arrayOf(
-                Verset(0,"ee","eng",125,15,23,15),
+                Verset(0,"ejjjjjjjjjjjjjjjj","eng",125,15,23,15),
                 Verset(5,"hghgh","eygqng",125,15,23,15)
             ).toList()
         )
@@ -47,8 +48,27 @@ class RacineAdapter:RecyclerView.Adapter<RacineAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.text = dataSet[position].racine
+        holder.itemView.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val activity = v!!.context as AppCompatActivity
+
+                val ayaFragment = RvAyaFragment(dataSet[position])
+              
+
+                activity.supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.flFragment,  ayaFragment)
+                    addToBackStack(null)
+                    commit()
+                }
+            }
+        })
     }
 
+<<<<<<< HEAD
     
+=======
+
+
+>>>>>>> cc29279ae8b95068994c35f75abafb7f187addd6
 
 }
