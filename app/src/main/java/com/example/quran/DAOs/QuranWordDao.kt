@@ -19,4 +19,5 @@ interface QuranWordDao {
 
     @Query("SELECT * FROM QuranWord")
     fun getQwords(): List<QuranWord>
+
 }

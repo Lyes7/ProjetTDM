@@ -28,11 +28,20 @@ abstract class AppDataBase : RoomDatabase() {
         fun getAppDataBase(context: Context): AppDataBase? {
             if (INSTANCE == null){
                 synchronized(AppDataBase::class){
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "myDB").build()
+                    Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "Test").build()
+                    //INSTANCE = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "myDB").build()
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "gkjh46541").createFromAsset("QuranDB.db")
+                        .allowMainThreadQueries().build()
                 }
             }
             return INSTANCE
         }
+
+        /*fun CreateAppDataBase(context: Context) : AppDataBase? {
+            synchronized(AppDataBase::class)
+        }*/
+
+
 
         fun destroyDataBase(){
             INSTANCE = null

@@ -16,17 +16,55 @@
         android:id="@+id/country_search"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/white"
+        android:background="#FFFFFF"
         android:textCursorDrawable="@null"
+        app:defaultQueryHint="البحث عن جذر ..."
         app:iconifiedByDefault="false"
-        app:queryBackground="@null" />
-    <TextView
-        android:id="@+id/tvtest"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="yaaaw"
-        android:textSize="20sp"/>
+        app:queryBackground="@null">
 
+    </androidx.appcompat.widget.SearchView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="#003147"
+        >
+
+        <TextView
+            android:id="@+id/lenTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:textAlignment="textEnd"
+            android:layout_marginLeft="5dp"
+            android:text="عدد الأحرف" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الجذر"
+            android:textColor="#FFF"
+            android:layout_weight="8"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/idTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الرقم"
+            android:textColor="#FFF"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:layout_marginRight="5dp" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_racine"

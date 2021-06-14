@@ -1,21 +1,31 @@
 package com.example.quran
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.quran.DataBase.AppDataBase
 import com.example.quran.Models.Racine
 import com.example.quran.Models.Verset
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
-class AyahRecyclerAdapter(val racine: Racine): RecyclerView.Adapter<AyahRecyclerAdapter.ViewHolder>() {
 
 
-    private  var dataSet = arrayOf(
-        Verset(0,1,5,"هُوَ الَّذِي يُسَيِّرُكُمْ فِي الْبَرِّ وَالْبَحْرِ حَتَّى إِذَا كُنْتُمْ فِي الْفُلْكِ وَجَرَيْنَ بِهِمْ بِرِيحٍ طَيِّبَةٍ وَفَرِحُوا بِهَا جَاءَتْهَا رِيحٌ عَاصِفٌ وَجَاءَهُمُ الْمَوْجُ مِنْ كُلِّ مَكَانٍ وَظَنُّوا أَنَّهُمْ أُحِيطَ بِهِمْ دَعَوُا اللَّهَ مُخْلِصِينَ لَهُ الدِّينَ لَئِنْ أَنْجَيْتَنَا مِنْ هَذِهِ لَنَكُونَنَّ مِنَ الشَّاكِرِينَ",125,15)
-    ).toList()
+
+class AyahRecyclerAdapter(context : Context, val racine: Racine): RecyclerView.Adapter<AyahRecyclerAdapter.ViewHolder>(){
+
+    private var db: AppDataBase? = AppDataBase.getAppDataBase(context)
+    private var dataSet: List<Verset>? =  db?.versetDao()?.getVersetsByRacine(racine.idRacine)
+
+
+
 
     //private  var dataSet = racine.listVerset
 
@@ -32,17 +42,20 @@ class AyahRecyclerAdapter(val racine: Racine): RecyclerView.Adapter<AyahRecycler
     }
 
     override fun getItemCount(): Int {
-        return dataSet.size
+
+        return dataSet?.size!!
+
     }
 
     override fun onBindViewHolder(holder: AyahRecyclerAdapter.ViewHolder, position: Int) {
-        holder.title.text = "سورة البقرة"
-        holder.ayah.text = dataSet[position].Text_AR
+
+        holder.title.text = "test"
+        holder.ayah.text = dataSet!![position].Text_AR
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val activity = v!!.context as AppCompatActivity
 
-                val detailFragment = DetailVerset(dataSet[position])
+                val detailFragment = DetailVerset(dataSet!![position])
 
 
                 activity.supportFragmentManager.beginTransaction().apply {
@@ -54,6 +67,9 @@ class AyahRecyclerAdapter(val racine: Racine): RecyclerView.Adapter<AyahRecycler
         })
 
     }
+
+
+
 
 
 }

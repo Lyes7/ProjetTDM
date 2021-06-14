@@ -21,7 +21,7 @@ class RvAyaFragment(private val racine: Racine) : Fragment(R.layout.fragment_rv_
             val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_aya)
             recyclerView?.layoutManager = this.layoutManager
 
-            adapter = AyahRecyclerAdapter(racine)
+            adapter = AyahRecyclerAdapter(this.requireContext(),racine)
 
             recyclerView?.adapter = this.adapter
 

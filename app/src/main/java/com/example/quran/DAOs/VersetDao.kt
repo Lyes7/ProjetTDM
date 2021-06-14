@@ -18,4 +18,9 @@ interface VersetDao {
 
     @Query("SELECT * FROM Verset")
     fun getVersets(): List<Verset>
+
+    @Query("select Verset.* from Verset JOIN QuranWord on Verset.IdAya == QuranWord.Id_Aya and QuranWord.idRacine == :RacineId")
+    fun getVersetsByRacine(RacineId: Int) : List<Verset>
+
+    //select Aya.* from Aya JOIN QuranWord on Aya.Id_Aya = QuranWord.ID_Aya and QuranWord.idRacine = 25
 }

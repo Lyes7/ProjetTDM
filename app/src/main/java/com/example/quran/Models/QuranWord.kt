@@ -4,16 +4,15 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity (foreignKeys = [ForeignKey(entity = Surah::class,
-    parentColumns = ["IdSourat"], childColumns = ["IdSourat"]),
-    ForeignKey(entity = Racine::class,
-        parentColumns = ["idRacine"], childColumns = ["idRacine"])
-])
+    /*(foreignKeys = [ForeignKey(entity = Racine::class,
+        parentColumns = ["idRacine"], childColumns = ["idRacine"]),ForeignKey(entity = Verset::class,
+    parentColumns = ["IdAya"], childColumns = ["Id_Aya"])
+])*/
+@Entity()
 data class QuranWord(
     @PrimaryKey()
     val ID_Word: Int,
-    val IdSourat: Int,
-    val NumAya: Int,
+    val Id_Aya : String,
     val idRacine: Int,
     val ArabicWord: String,
     val englishWord: String

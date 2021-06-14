@@ -42,9 +42,9 @@ arrayListOf(
 
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        //var id: TextView = itemView.findViewById(R.id.SuraName)
-        var title: TextView = itemView.findViewById(R.id.Abc)
-        //var racine: TextView = itemView.findViewById(R.id.RacineLen)
+        var id: TextView = itemView.findViewById(R.id.idRacine)
+        var title: TextView = itemView.findViewById(R.id.racineTv)
+        var len: TextView = itemView.findViewById(R.id.lenRacine)
 
     }
 
@@ -60,7 +60,10 @@ arrayListOf(
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.id.text = countryFilterList[position].idRacine.toString()
         holder.title.text = countryFilterList[position].Racine
+        holder.len.text = countryFilterList[position].NBLettre.toString()
+
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val activity = v!!.context as AppCompatActivity

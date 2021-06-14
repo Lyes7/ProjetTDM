@@ -32,9 +32,7 @@ class RvRacineFragment(var msg: List<Racine>) : Fragment(R.layout.fragment_rv_ra
 
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_racine)
-        val  tv = view?.findViewById<TextView>(R.id.tvtest)
 
-        //tv.text = msg
 
         recyclerView?.layoutManager = this.layoutManager
 
