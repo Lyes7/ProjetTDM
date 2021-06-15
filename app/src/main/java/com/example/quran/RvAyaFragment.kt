@@ -3,6 +3,7 @@ package com.example.quran
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quran.Models.Racine
@@ -16,6 +17,8 @@ class RvAyaFragment(private val racine: Racine) : Fragment(R.layout.fragment_rv_
             super.onViewCreated(view, savedInstanceState)
 
             layoutManager = LinearLayoutManager(requireContext())
+            var listTitle = view.findViewById<TextView>(R.id.listAyaTitle)
+            listTitle.text = "الآيات التي تحتوي على الجذر: " + racine.Racine
 
 
             val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_aya)

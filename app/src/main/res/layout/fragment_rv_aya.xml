@@ -7,15 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".RvAyaFragment">
 
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_aya"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="687dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/listAyaTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="الآيات التي تحتوي على الجذر: "
+            android:layout_marginRight="8dp"
+            android:textStyle=" bold "
+            android:layout_marginTop="3dp"
+            android:textColor="#FF003147"
+            android:textSize="23dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_aya"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

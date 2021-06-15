@@ -1,12 +1,11 @@
-package com.example.quran
+package com.example.quran.Activities
 
-import android.graphics.Typeface.createFromAsset
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.room.Room
 import com.example.quran.DAOs.RacineDao
 import com.example.quran.DataBase.AppDataBase
-import com.example.quran.Models.Racine
+import com.example.quran.R
+import com.example.quran.RvRacineFragment
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
