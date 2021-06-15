@@ -54,7 +54,7 @@
         android:gravity="bottom"
         android:padding="15dp"
         android:layout_weight="1"
-        android:text="Powered by\nHAMZAOUI &#8756; DOUAG"
+        android:text="Powered by\nDOUAG and HAMZAOUI"
         android:textAlignment="center"
         android:textColor="#5A5A5A"
         android:textSize="12dp" />

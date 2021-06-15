@@ -10,8 +10,8 @@ import com.example.quran.ApiControllers.Request.TafsirService
 import com.example.quran.ApiControllers.Response.AyaIndexResponse
 import com.example.quran.ApiControllers.Response.AyaResponse
 import com.example.quran.ApiControllers.Response.TafsirResponse
+import com.example.quran.Models.Mofasir
 import com.example.quran.Models.Verset
-import kotlinx.android.synthetic.main.fragment_detail_verset.*
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -31,13 +31,31 @@ class DetailVerset(val verset: Verset) : Fragment(R.layout.fragment_detail_verse
     detail_textView.text = verset.Text_AR
 
 
-    val a = arrayOf("mohamed","lyes","lamin")
-    val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,a)
+    val mofasirin = arrayListOf<Mofasir>(
+        Mofasir(1, "التفسير الميسر"),
+        Mofasir(2, "تفسير الجلالين"),
+        Mofasir(3, "تفسير السعدي"),
+        Mofasir(4, "تفسير ابن كثير"),
+        Mofasir(5, "تفسير الوسيط لطنطاوي"),
+        Mofasir(6, "تفسير البغوي"),
+        Mofasir(7, "تفسير القرطبي"),
+        Mofasir(8, "تفسير الطبري"),
+        Mofasir(9, "Arberry"),
+        Mofasir(10, "Yusuf Ali"),
+        Mofasir(11, "Keyzer"),
+        Mofasir(12, "Leemhuis"),
+        Mofasir(13, "Siregar")
+        )
+    val test = view.findViewById<TextView>(R.id.tafsir)
+
+    val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,mofasirin)
+
+
 
     val ayaEng = view?.findViewById<TextView>(R.id.ayaEn)
 
-    val adapterView = view.findViewById<AutoCompleteTextView>(R.id.autoComplete)
-    adapterView.setAdapter(arrayAdapter)
+  // val adapterView = view.findViewById<AutoCompleteTextView>(R.id.autoComplete)
+    //adapterView.setAdapter(arrayAdapter)
 
 
 
@@ -47,18 +65,36 @@ class DetailVerset(val verset: Verset) : Fragment(R.layout.fragment_detail_verse
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     val tafsirApi = retrofitTafsir.create(TafsirService::class.java)
-    val responseTafsir = tafsirApi.getTafsirByMofasirId(4,verset.IdSourat,verset.NumAya)
 
-        responseTafsir.enqueue(object: Callback<TafsirResponse> {
-            override fun onResponse(call: Call<TafsirResponse>,responseTafsir: Response<TafsirResponse>) {
-                val tafsirSection = view.findViewById<TextView>(R.id.tafsirSection)
-                tafsirSection.text = responseTafsir.body()?.text
+        //get mofassir from drop list
+        val dropList = view.findViewById<Spinner>(R.id.ListMofasirin)
+        val tafsirSection = view.findViewById<TextView>(R.id.tafsirSection)
+
+        dropList.adapter = arrayAdapter
+        dropList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedObject = dropList.selectedItem as Mofasir
+
+                val responseTafsir = tafsirApi.getTafsirByMofasirId(selectedObject.id,verset.IdSourat,verset.NumAya)
+
+                responseTafsir.enqueue(object: Callback<TafsirResponse> {
+                    override fun onResponse(call: Call<TafsirResponse>,responseTafsir: Response<TafsirResponse>) {
+                        tafsirSection.text = responseTafsir.body()?.text
+                    }
+
+                    override fun onFailure(call: Call<TafsirResponse>, t: Throwable) {
+
+                    }
+                } )
             }
 
-            override fun onFailure(call: Call<TafsirResponse>, t: Throwable) {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
-        } )
+
+
+        }
+
 
     val retrofitIndex = Retrofit.Builder().baseUrl(url)
         .addConverterFactory(GsonConverterFactory.create())
