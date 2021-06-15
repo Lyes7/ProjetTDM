@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- This a "Splash Screen" XML file, here all the text view, Image view are laid in a linearly fashion inside the Linear layout. The reason of linear layout is for accurately placing the logo and the progress bar without happen to use the constraints -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -47,12 +51,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/progressBar"
-        android:layout_marginTop="150dp"
-        android:gravity="center"
+        android:gravity="bottom"
         android:padding="15dp"
+        android:layout_weight="1"
         android:text="Powered by\nHAMZAOUI &#8756; DOUAG"
         android:textAlignment="center"
         android:textColor="#5A5A5A"
         android:textSize="12dp" />
 
 </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
