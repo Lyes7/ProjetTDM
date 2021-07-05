@@ -1,4 +1,4 @@
-package com.example.quran
+package com.example.quran.Fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.quran.Recyclers.AyahRecyclerAdapter
 import com.example.quran.Models.Racine
+import com.example.quran.R
+
 class RvAyaFragment(private val racine: Racine) : Fragment(R.layout.fragment_rv_aya) {
 
 

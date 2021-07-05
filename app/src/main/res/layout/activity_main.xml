@@ -44,7 +44,16 @@
                     android:textColor="#EDEDED"
                     android:layout_marginLeft="7dp"
                     android:textSize="20sp"
-                    android:textStyle=" bold |italic" />
+                    android:textStyle="bold|italic" />
+                <ImageView
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/mark"
+                    android:layout_width="10dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    app:srcCompat="@drawable/ic_bookmark" />
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>

@@ -1,7 +1,6 @@
-package com.example.quran
+package com.example.quran.Recyclers
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +8,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quran.DataBase.AppDataBase
+import com.example.quran.Fragment.DetailVerset
 import com.example.quran.Models.Racine
 import com.example.quran.Models.Verset
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-
-
+import com.example.quran.R
 
 
 class AyahRecyclerAdapter(context : Context, val racine: Racine): RecyclerView.Adapter<AyahRecyclerAdapter.ViewHolder>(){
@@ -37,7 +33,7 @@ class AyahRecyclerAdapter(context : Context, val racine: Racine): RecyclerView.A
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AyahRecyclerAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var viewObj = LayoutInflater.from(parent.context).inflate(R.layout.aya_card, parent, false)
 
         return ViewHolder(viewObj)
@@ -50,7 +46,7 @@ class AyahRecyclerAdapter(context : Context, val racine: Racine): RecyclerView.A
 
     }
 
-    override fun onBindViewHolder(holder: AyahRecyclerAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
         holder.title.text = "سورة "+db?.surahDao()?.getSurahById(dataSet!![position].IdSourat)?.get(0)?.NomSourat

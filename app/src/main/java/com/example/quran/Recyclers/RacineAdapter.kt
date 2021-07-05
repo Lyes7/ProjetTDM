@@ -1,4 +1,4 @@
-package com.example.quran
+package com.example.quran.Recyclers
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,9 @@ import android.widget.Filterable
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.quran.Fragment.RvAyaFragment
 import com.example.quran.Models.Racine
-import com.example.quran.Models.Verset
+import com.example.quran.R
 import kotlin.collections.ArrayList
 
 class RacineAdapter(var msg: List<Racine>):RecyclerView.Adapter<RacineAdapter.ViewHolder>() , Filterable {
@@ -48,9 +49,9 @@ arrayListOf(
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RacineAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var viewObj = LayoutInflater.from(parent.context).inflate(R.layout.racine_card, parent, false)
-        return RacineAdapter.ViewHolder(viewObj)
+        return ViewHolder(viewObj)
     }
 
 
@@ -77,7 +78,8 @@ arrayListOf(
                     commit()
                 }
             }
-        })
+        }
+        )
     }
 
 

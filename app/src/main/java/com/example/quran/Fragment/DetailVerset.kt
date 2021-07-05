@@ -1,10 +1,13 @@
-package com.example.quran
+package com.example.quran.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.quran.Activities.SignInActivity
+
 import com.example.quran.ApiControllers.Request.AyaService
 import com.example.quran.ApiControllers.Request.TafsirService
 import com.example.quran.ApiControllers.Response.AyaIndexResponse
@@ -12,18 +15,46 @@ import com.example.quran.ApiControllers.Response.AyaResponse
 import com.example.quran.ApiControllers.Response.TafsirResponse
 import com.example.quran.Models.Mofasir
 import com.example.quran.Models.Verset
+import com.example.quran.R
+import com.google.firebase.auth.FirebaseAuth
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
 class DetailVerset(val verset: Verset) : Fragment(R.layout.fragment_detail_verset){
 
 
+private  lateinit var mAuth :FirebaseAuth
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
         super.onViewCreated(view, savedInstanceState)
+        mAuth= FirebaseAuth.getInstance()
+        val user =mAuth.currentUser
 
         val mushafBtn = view.findViewById<Button>(R.id.button)
+        val addFavoris = view.findViewById<TextView>(R.id.favori)
+
+        //add the
+        addFavoris.setOnClickListener {
+
+        if (user !=null)
+        {
+
+
+
+        }else{
+
+            val signInIntent =Intent(activity?.applicationContext, SignInActivity::class.java)
+                //Intent(this, SingInActivity::class.java)
+
+             startActivity(signInIntent)
+        }
+
+
+
+        }
 
 
 
@@ -48,7 +79,7 @@ class DetailVerset(val verset: Verset) : Fragment(R.layout.fragment_detail_verse
         )
     val test = view.findViewById<TextView>(R.id.tafsir)
 
-    val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,mofasirin)
+    val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item,mofasirin)
 
 
 
@@ -80,6 +111,7 @@ class DetailVerset(val verset: Verset) : Fragment(R.layout.fragment_detail_verse
                 responseTafsir.enqueue(object: Callback<TafsirResponse> {
                     override fun onResponse(call: Call<TafsirResponse>,responseTafsir: Response<TafsirResponse>) {
                         tafsirSection.text = responseTafsir.body()?.text
+
                     }
 
                     override fun onFailure(call: Call<TafsirResponse>, t: Throwable) {
@@ -161,3 +193,5 @@ class DetailVerset(val verset: Verset) : Fragment(R.layout.fragment_detail_verse
 
 
 }
+
+

@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.example.quran.DAOs.RacineDao
 import com.example.quran.DataBase.AppDataBase
 import com.example.quran.R
-import com.example.quran.RvRacineFragment
+import com.example.quran.Fragment.RvRacineFragment
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
