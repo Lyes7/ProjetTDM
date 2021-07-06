@@ -4,22 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.quran.DAOs.QuranWordDao
-import com.example.quran.DAOs.RacineDao
-import com.example.quran.DAOs.SurahDao
-import com.example.quran.DAOs.VersetDao
-import com.example.quran.Models.QuranWord
-import com.example.quran.Models.Racine
-import com.example.quran.Models.Surah
-import com.example.quran.Models.Verset
+import com.example.quran.DAOs.*
+import com.example.quran.Models.*
 
 @Database(entities = [Racine::class, Surah::class, Verset::class, QuranWord::class], version = 1)
 
 abstract class AppDataBase : RoomDatabase() {
     abstract fun racineDao(): RacineDao
+    //abstract fun historicRacineDao(): HistRacineDao
     abstract fun quranWordDao(): QuranWordDao
     abstract fun versetDao(): VersetDao
     abstract fun surahDao(): SurahDao
+
 
 
     companion object {
@@ -30,7 +26,7 @@ abstract class AppDataBase : RoomDatabase() {
                 synchronized(AppDataBase::class){
                     Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "Test").build()
                     //INSTANCE = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "myDB").build()
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "gkjh46541").createFromAsset("QuranDB.db")
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "database").createFromAsset("TdmQuranDB.db")
                         .allowMainThreadQueries().build()
                 }
             }
