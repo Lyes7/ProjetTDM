@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quran.DataBase.AppDataBase
+import com.example.quran.DataBase.ServiceRoom
 import com.example.quran.Fragment.DetailVerset
 import com.example.quran.Models.Racine
 import com.example.quran.Models.Verset
@@ -16,8 +17,7 @@ import com.example.quran.R
 
 class AyahRecyclerAdapter(context : Context, val racine: Racine): RecyclerView.Adapter<AyahRecyclerAdapter.ViewHolder>(){
 
-    private var db: AppDataBase? = AppDataBase.getAppDataBase(context)
-    private var dataSet: List<Verset>? =  db?.versetDao()?.getVersetsByRacine(racine.idRacine)
+    private var dataSet: List<Verset>? =  ServiceRoom.database.versetDao()?.getVersetsByRacine(racine.idRacine)
 
 
 
@@ -49,7 +49,7 @@ class AyahRecyclerAdapter(context : Context, val racine: Racine): RecyclerView.A
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
-        holder.title.text = "سورة "+db?.surahDao()?.getSurahById(dataSet!![position].IdSourat)?.get(0)?.NomSourat
+        holder.title.text = "سورة "+ServiceRoom.database.surahDao()?.getSurahById(dataSet!![position].IdSourat)?.get(0)?.NomSourat
         holder.ayah.text = dataSet!![position].Text_AR
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {

@@ -24,23 +24,7 @@
             android:padding="3dp"
             android:gravity="center"
             android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/shareBtn"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_share" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="شارك الآية"
-                android:textStyle="bold"
-                android:layout_weight="45"
-                android:textColor="#fff"
-                android:textAlignment="center"
-                android:textSize="12sp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,36 +61,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/nbrMots"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:text="25"
-                    android:textSize="15dp"
-                    android:textAlignment="textStart"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:text="عدد الكلمات في الآية: "
-                    android:textSize="15dp"
-                    android:textAlignment="textStart"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:text="نص الآية"
-                    android:textAlignment="textStart"
-                    android:layout_weight="2"
-                    android:textSize="15dp"
-                    android:textStyle="bold"/>
-            </LinearLayout>
-
-
+                android:text="نص الآية"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -158,40 +118,54 @@
                 android:text="إظهار الأية في المصحف"
                 android:textStyle="bold" />
 
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    app:cardBackgroundColor="#E5EAFB"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="12dp">
+            <TextView
+                android:id="@+id/kari2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:text="إختيار القارئ" />
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
 
-<LinearLayout
+                <AutoCompleteTextView
+                    android:id="@+id/autoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="none"
+                    android:text="English"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
                 android:id="@+id/audioLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp"
-                >
+                android:layout_marginTop="5dp">
 
                 <ImageView
-                    android:id="@+id/audioBtn"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_play" />
+                    android:src="?attr/actionModeShareDrawable" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="12"
+                    android:layout_weight="10"
                     android:textStyle="bold"
-                    android:textSize="16dp"
                     android:textAlignment="textEnd"
                     android:layout_gravity="center"
                     android:text="إستمع إلى الآية" />
             </LinearLayout>
-</androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/tafsir"

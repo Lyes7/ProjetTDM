@@ -6,19 +6,18 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.quran.DAOs.RacineDao
-import com.example.quran.DataBase.AppDataBase
 import com.example.quran.Models.Racine
 import com.example.quran.R
 import com.example.quran.Recyclers.RacineAdapter
-import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_rv_racine.*
+import java.util.*
 
 class RvRacineFragment(var msg: List<Racine>) : Fragment(R.layout.fragment_rv_racine){
 
 
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RacineAdapter.ViewHolder>? = null
+
 
 
 
@@ -34,9 +33,6 @@ class RvRacineFragment(var msg: List<Racine>) : Fragment(R.layout.fragment_rv_ra
 
 
         recyclerView?.layoutManager = this.layoutManager
-
-
-
 
         adapter = RacineAdapter(msg)
 

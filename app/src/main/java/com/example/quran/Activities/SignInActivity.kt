@@ -21,15 +21,17 @@ import java.util.Calendar.getInstance
 
 class SignInActivity: AppCompatActivity() {
 
-/*
+    companion object{
+        private const val RC_SIGN_IN=120
+    }
     private lateinit var mAuth:FirebaseAuth
     private lateinit var googleSignIn: GoogleSignInClient
-*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activitysignin)
-}
-/*
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activitysignin)
+
+
 // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -94,5 +96,5 @@ class SignInActivity: AppCompatActivity() {
                 }
             }
     }
-*/
+
 }

@@ -4,25 +4,33 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.quran.DAOs.RacineDao
 import com.example.quran.DataBase.AppDataBase
-import com.example.quran.Fragment.HistoricFragment
 import com.example.quran.R
 import com.example.quran.Fragment.RvRacineFragment
+<<<<<<< HEAD
 import com.example.quran.Models.Racine
+import com.example.quran.DataBase.ServiceRoom
+=======
+>>>>>>> parent of 01b7046... test commit
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(){
-
-    private var db: AppDataBase? = null
-    private var racineDao: RacineDao? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.getSupportActionBar()?.hide()
         setContentView(R.layout.activity_main)
 
+<<<<<<< HEAD
+        val racines=ServiceRoom.database.racineDao()?.getRacines()
+        
+        val racineFragment = RvRacineFragment(racines!!)
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment,  racineFragment)
+            commit()
+        }
+=======
         Observable.fromCallable {
             db = AppDataBase.getAppDataBase(context = this)
             racineDao = db?.racineDao()
@@ -52,39 +60,6 @@ class MainActivity : AppCompatActivity(){
             .subscribe()
 
 
-/*
-        Observable.fromCallable {
-            db = AppDataBase.getAppDataBase(context = this)
-            histRacineDao = db?.historicRacineDao()
-
-
-
-            with(histRacineDao) {
-                // this?.insertRacine(racine1)
-                //this?.insertRacine(racine2)
-
-            }
-            db?.historicRacineDao()?.getHistRacines()
-        }.doOnNext { list ->
-            var finalString = ""
-            list?.map { finalString += it.Racine + " - " }
-            val historicFragment = HistoricFragment(list!!)
-            history.setOnClickListener {
-
-                supportFragmentManager.beginTransaction().apply {
-                    replace(R.id.flFragment,  historicFragment)
-                    commit()
-                }
-            }
-
-
-        }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()  */
-
-
-
-
 
 
 
@@ -93,7 +68,6 @@ class MainActivity : AppCompatActivity(){
 
 
 
+>>>>>>> parent of 01b7046... test commit
     }
-
-
 }

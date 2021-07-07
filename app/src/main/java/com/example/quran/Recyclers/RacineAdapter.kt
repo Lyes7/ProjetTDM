@@ -4,27 +4,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
+import com.example.quran.DataBase.ServiceRoom
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.example.quran.DataBase.AppDataBase
 import com.example.quran.Fragment.RvAyaFragment
-import com.example.quran.Models.HistoricRacine
 import com.example.quran.Models.Racine
 import com.example.quran.R
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlin.collections.ArrayList
 
 class RacineAdapter(var msg: List<Racine>):RecyclerView.Adapter<RacineAdapter.ViewHolder>() , Filterable {
 
 
-    var racinesFilterList = ArrayList<Racine>()
-    //private var db: AppDataBase? = null
+    var countryFilterList = ArrayList<Racine>()
+
     /*
     arrayOf(
     Verset(0,2,2,"eng",125,15),
@@ -45,7 +39,7 @@ arrayListOf(
 
     init {
         dataSet.addAll(msg)
-        racinesFilterList = dataSet
+        countryFilterList = dataSet
     }
 
 
@@ -63,31 +57,27 @@ arrayListOf(
 
 
     override fun getItemCount(): Int {
-        return racinesFilterList.size
+        return countryFilterList.size
     }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.id.text = racinesFilterList[position].idRacine.toString()
-        holder.title.text = racinesFilterList[position].Racine
-        holder.len.text = racinesFilterList[position].NBLettre.toString()
+        holder.id.text = countryFilterList[position].idRacine.toString()
+        holder.title.text = countryFilterList[position].Racine
+        holder.len.text = countryFilterList[position].NBLettre.toString()
 
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val activity = v!!.context as AppCompatActivity
 
-                /*
-                val db = Room.databaseBuilder(
-                    activity.applicationContext,
-                    AppDataBase::class.java, "database-name"
-                ).build()
-
-                val historicRacineDao = db.historicRacineDao()
-                historicRacineDao.insertHistRacine(HistoricRacine(racinesFilterList[position].idRacine))
-*/
+<<<<<<< HEAD
+                val history=ServiceRoom.database.historicRacineDao().insertHistRacine(HistoricRacine(racinesFilterList[position].idRacine))
 
                 val ayaFragment = RvAyaFragment(racinesFilterList[position])
+=======
+                val ayaFragment = RvAyaFragment(countryFilterList[position])
               
+>>>>>>> parent of 01b7046... test commit
 
                 activity.supportFragmentManager.beginTransaction().apply {
                     replace(R.id.flFragment,  ayaFragment)
@@ -105,7 +95,7 @@ arrayListOf(
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint.toString()
                 if (charSearch.isEmpty()) {
-                    racinesFilterList = dataSet
+                    countryFilterList = dataSet
                 } else {
                     val resultList = ArrayList<Racine>()
                     for (row in dataSet) {
@@ -113,16 +103,16 @@ arrayListOf(
                             resultList.add(row)
                         }
                     }
-                    racinesFilterList = resultList
+                    countryFilterList = resultList
                 }
                 val filterResults = FilterResults()
-                filterResults.values = racinesFilterList
+                filterResults.values = countryFilterList
                 return filterResults
             }
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                racinesFilterList = results?.values as ArrayList<Racine>
+                countryFilterList = results?.values as ArrayList<Racine>
                 notifyDataSetChanged()
             }
 

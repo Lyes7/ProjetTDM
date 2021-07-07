@@ -4,19 +4,29 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.quran.DAOs.*
-import com.example.quran.Models.*
+import com.example.quran.DAOs.QuranWordDao
+import com.example.quran.DAOs.RacineDao
+import com.example.quran.DAOs.SurahDao
+import com.example.quran.DAOs.VersetDao
+import com.example.quran.Models.QuranWord
+import com.example.quran.Models.Racine
+import com.example.quran.Models.Surah
+import com.example.quran.Models.Verset
 
-@Database(entities = [Racine::class, Surah::class, Verset::class, QuranWord::class], version = 1)
+@Database(entities = [Racine::class, Surah::class, Verset::class, QuranWord::class,HistoricRacine::class], version = 1)
 
 abstract class AppDataBase : RoomDatabase() {
     abstract fun racineDao(): RacineDao
-    //abstract fun historicRacineDao(): HistRacineDao
+<<<<<<< HEAD
+    abstract fun historicRacineDao(): HistRacineDao
+=======
+>>>>>>> parent of 01b7046... test commit
     abstract fun quranWordDao(): QuranWordDao
     abstract fun versetDao(): VersetDao
     abstract fun surahDao(): SurahDao
 
-
+<<<<<<< HEAD
+=======
 
     companion object {
         var INSTANCE: AppDataBase? = null
@@ -26,7 +36,7 @@ abstract class AppDataBase : RoomDatabase() {
                 synchronized(AppDataBase::class){
                     Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "Test").build()
                     //INSTANCE = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "myDB").build()
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "database").createFromAsset("TdmQuranDB.db")
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "gkjh46541").createFromAsset("QuranDB.db")
                         .allowMainThreadQueries().build()
                 }
             }
@@ -43,4 +53,5 @@ abstract class AppDataBase : RoomDatabase() {
             INSTANCE = null
         }
     }
+>>>>>>> parent of 01b7046... test commit
 }
