@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CardView"
+    android:layout_margin="5dp"
+    android:layout_marginBottom="3dp"
+    app:cardBackgroundColor="#FFE9C8"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="3dp"
+    app:contentPadding="1dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+
+
+        <TextView
+            android:id="@+id/delete_racine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textAlignment="center"
+            android:textColor="#DC0202"
+            android:text="حذف" />
+
+        <TextView
+            android:id="@+id/racineTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Hellow World"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/idRacine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            android:layout_marginRight="5dp"
+            android:text="TextView" />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

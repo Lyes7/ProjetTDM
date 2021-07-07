@@ -1,8 +1,13 @@
 package com.example.quran.Fragment
 
+import MyCustomDialog
 import android.content.Intent
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -16,45 +21,69 @@ import com.example.quran.ApiControllers.Response.TafsirResponse
 import com.example.quran.Models.Mofasir
 import com.example.quran.Models.Verset
 import com.example.quran.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.android.synthetic.main.activitysignin.*
+import kotlinx.android.synthetic.main.fragment_detail_verset.*
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 
 class DetailVerset(val verset: Verset) : Fragment(R.layout.fragment_detail_verset){
 
 
-private  lateinit var mAuth :FirebaseAuth
+
+    private val mediaPlayer =  MediaPlayer();
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
         super.onViewCreated(view, savedInstanceState)
-        mAuth= FirebaseAuth.getInstance()
-        val user =mAuth.currentUser
+        Toast.makeText(requireContext(), verset.ayaIndex.toString(), Toast.LENGTH_LONG).show()
 
         val mushafBtn = view.findViewById<Button>(R.id.button)
         val addFavoris = view.findViewById<TextView>(R.id.favori)
 
+        nbrMots.text = verset.nbMots.toString()
+
         //add the
+
+
+        /*signBtn.setOnClickListener{
+            signIn()
+            val currentUser = mAuth.currentUser
+            print(currentUser)
+        }*/
         addFavoris.setOnClickListener {
-
-        if (user !=null)
-        {
-
-
-
-        }else{
-
-            val signInIntent =Intent(activity?.applicationContext, SignInActivity::class.java)
-                //Intent(this, SingInActivity::class.java)
-
-             startActivity(signInIntent)
+            MyCustomDialog().show(requireActivity()!!.supportFragmentManager, "MyCustomFragment")
         }
 
+        var played = false
+        var preapred = false
+        audioBtn.setOnClickListener {
+            if(!preapred){
+                val uri =  "https://cdn.islamic.network/quran/audio/128/ar.alafasy/"+verset.ayaIndex.toString()+".mp3"
+                prepareAudio(uri)
+                preapred = true
+            }
+            if (played) {
+                mediaPlayer.pause()
+                audioBtn.setImageResource(R.drawable.ic_play)
+                played = false
+
+            }else{
+                mediaPlayer.start()
+                audioBtn.setImageResource(R.drawable.ic_pause)
+                played = true
+
+            }
 
 
         }
+
 
 
 
@@ -81,16 +110,33 @@ private  lateinit var mAuth :FirebaseAuth
 
     val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item,mofasirin)
 
-
-
     val ayaEng = view?.findViewById<TextView>(R.id.ayaEn)
 
   // val adapterView = view.findViewById<AutoCompleteTextView>(R.id.autoComplete)
     //adapterView.setAdapter(arrayAdapter)
 
+    val url = "http://salamquran.com/en/api/v6/"
+
+    val retrofit = Retrofit.Builder().baseUrl(url)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    val ayaApiTranslate = retrofit.create(AyaService::class.java)
+    val response = ayaApiTranslate.getAya(verset.ayaIndex)
+    response.enqueue(object : Callback<AyaResponse>{
+        override fun onResponse(call: Call<AyaResponse>, response: Response<AyaResponse>) {
+            val res = response.body()
+            ayaEng.text = res!!.result?.translate?.text
+
+        }
+        //failer of AyaResponse
+        override fun onFailure(call: Call<AyaResponse>, t: Throwable) {
+
+        }
+
+    })
 
 
-    val url = "https://salamquran.com/en/api/v6/"
     val tafsirUrl = "http://api.quran-tafseer.com/"
     val retrofitTafsir = Retrofit.Builder().baseUrl(tafsirUrl)
         .addConverterFactory(GsonConverterFactory.create())
@@ -123,15 +169,11 @@ private  lateinit var mAuth :FirebaseAuth
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
+ }
 
 
-        }
 
-
-    val retrofitIndex = Retrofit.Builder().baseUrl(url)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    val ayaApi = retrofitIndex.create(AyaService::class.java)
+    val ayaApi = retrofit.create(AyaService::class.java)
     val responseIndex = ayaApi.getAyaIndex(verset.IdSourat,verset.NumAya,1)
 
     responseIndex.enqueue(object:Callback<AyaIndexResponse>{
@@ -152,24 +194,7 @@ private  lateinit var mAuth :FirebaseAuth
                 }
             }
 
-            val retrofit = Retrofit.Builder().baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
 
-            val ayaApi = retrofit.create(AyaService::class.java)
-            val response = ayaApi.getAya(resIndex?.result!!.index)
-            response.enqueue(object : Callback<AyaResponse>{
-                override fun onResponse(call: Call<AyaResponse>, response: Response<AyaResponse>) {
-                    val res = response.body()
-                    ayaEng.text = res!!.result?.translate?.text
-
-                }
-                //failer of AyaResponse
-                override fun onFailure(call: Call<AyaResponse>, t: Throwable) {
-
-                }
-
-            })
         }
 
         override fun onFailure(call: Call<AyaIndexResponse>, t: Throwable) {
@@ -178,20 +203,50 @@ private  lateinit var mAuth :FirebaseAuth
 
         }
 
+
+
     })
-
-
-
-
-
-
 
 
 
     }
 
+    private fun addFav() {
+
+    }
+
+    private fun prepareAudio(audioUrl: String) {
 
 
+        // initializing media player
+
+
+        // below line is use to set the audio
+        // stream type for our media player.
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+        // below line is use to set our
+        // url to our media player.
+        try {
+            mediaPlayer.setDataSource(audioUrl);
+            // below line is use to prepare
+            // and start our media player.
+            mediaPlayer.prepare();
+        } catch ( e : IOException) {
+            e.printStackTrace();
+        }
+        // below line is use to display a toast message.
+        Toast.makeText(requireContext(),"Audio started playing..", Toast.LENGTH_SHORT).show()
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mediaPlayer.stop()
+    }
 }
+
+
+
 
 

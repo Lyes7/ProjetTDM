@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 
 
 @Entity ()
-    //foreignKeys = [ForeignKey(entity = Verset::class,parentColumns = ["verset"], childColumns = ["verset"])])
 data class Racine (
     @PrimaryKey()
     val idRacine:Int

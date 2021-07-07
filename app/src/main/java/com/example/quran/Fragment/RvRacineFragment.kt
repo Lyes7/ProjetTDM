@@ -20,7 +20,6 @@ class RvRacineFragment(var msg: List<Racine>) : Fragment(R.layout.fragment_rv_ra
 
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -33,6 +32,9 @@ class RvRacineFragment(var msg: List<Racine>) : Fragment(R.layout.fragment_rv_ra
 
 
         recyclerView?.layoutManager = this.layoutManager
+
+
+
 
         adapter = RacineAdapter(msg)
 
