@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:563265936759:android:5708cdfefb147f52cf1572",
+        "mobilesdk_app_id": "1:563265936759:android:21bb3bfd33abb5f1cf1572",
         "android_client_info": {
           "package_name": "com.example.quran"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "563265936759-gn5miuvaphad9fidhqj99188l98hl20g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quran",
+            "certificate_hash": "bf5f1c5f99a1ab852452892023ccb64a9052f316"
+          }
+        },
         {
           "client_id": "563265936759-rnv5t0ok87mt7gj1mtccumvkn51nqc1k.apps.googleusercontent.com",
           "client_type": 3
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "563265936759-rnv5t0ok87mt7gj1mtccumvkn51nqc1k.apps.googleusercontent.com",
+              "client_id": "563265936759-h0r4m14dfbtegr6sovgrutcigampnqrd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

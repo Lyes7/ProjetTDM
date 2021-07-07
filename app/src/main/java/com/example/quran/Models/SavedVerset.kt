@@ -7,11 +7,10 @@ import androidx.room.*
     ])
 data class SavedVerset (
     @PrimaryKey(autoGenerate = true)
-    val IdSavedAya: Int,
+    val IdSavedAya:Int,
     val IdAya: String,
     val note: String
 
 ) {
-
 
 }

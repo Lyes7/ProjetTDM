@@ -10,7 +10,6 @@ import com.example.quran.Models.Racine
 import com.example.quran.R
 import com.example.quran.Recyclers.RacineAdapter
 import kotlinx.android.synthetic.main.fragment_rv_racine.*
-import java.util.*
 
 class RvRacineFragment(var msg: List<Racine>) : Fragment(R.layout.fragment_rv_racine){
 
@@ -42,7 +41,7 @@ class RvRacineFragment(var msg: List<Racine>) : Fragment(R.layout.fragment_rv_ra
 
         recyclerView?.adapter = this.adapter
 
-        country_search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        et_search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }

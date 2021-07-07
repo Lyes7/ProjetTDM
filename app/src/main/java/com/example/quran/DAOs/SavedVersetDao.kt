@@ -14,6 +14,9 @@ interface SavedVersetDao {
     @Delete
     fun deleteSavedVerset(savedVerset: SavedVerset)
 
+    @Query("DELETE FROM SavedVerset WHERE IdAya == :idAya AND note == :note ")
+    fun deleteSavedVersetByNote(idAya:String, note:String)
+
     @Query("SELECT * FROM SAVEDVERSET WHERE IdSavedAya == :idSavedAya")
     fun getSavedVersetByNumAya(idSavedAya: Int): List<SavedVerset>
 

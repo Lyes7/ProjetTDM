@@ -9,7 +9,7 @@ import androidx.room.Room
 object ServiceRoom {
     lateinit var context: Context
     val database by lazy {
-         Room.databaseBuilder(context, AppDataBase::class.java,"quranDB")
+         Room.databaseBuilder(context, AppDataBase::class.java,"Qurandb")
             .createFromAsset("TdmQuranDB.db")
             .allowMainThreadQueries()
             .build()

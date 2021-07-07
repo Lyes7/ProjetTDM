@@ -2,17 +2,13 @@ package com.example.quran.Fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quran.DataBase.ServiceRoom
-import com.example.quran.Models.Racine
 import com.example.quran.R
 import com.example.quran.Recyclers.HistRacineAdapter
-import com.example.quran.Recyclers.RacineAdapter
 import kotlinx.android.synthetic.main.fragment_rv_racine.*
 
 class HistoricFragment:Fragment(R.layout.fragment_rv_hist_racine){
@@ -35,7 +31,7 @@ class HistoricFragment:Fragment(R.layout.fragment_rv_hist_racine){
 
         recyclerView?.adapter = this.adapter
 
-        country_search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        et_search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }

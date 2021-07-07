@@ -36,29 +36,21 @@ import java.io.IOException
 class DetailVerset(val verset: Verset) : Fragment(R.layout.fragment_detail_verset){
 
 
-
     private val mediaPlayer =  MediaPlayer();
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Toast.makeText(requireContext(), verset.ayaIndex.toString(), Toast.LENGTH_LONG).show()
+
 
         val mushafBtn = view.findViewById<Button>(R.id.button)
         val addFavoris = view.findViewById<TextView>(R.id.favori)
 
         nbrMots.text = verset.nbMots.toString()
 
-        //add the
-
-
-        /*signBtn.setOnClickListener{
-            signIn()
-            val currentUser = mAuth.currentUser
-            print(currentUser)
-        }*/
+       
         addFavoris.setOnClickListener {
-            MyCustomDialog().show(requireActivity()!!.supportFragmentManager, "MyCustomFragment")
+            MyCustomDialog(verset).show(requireActivity()!!.supportFragmentManager, "MyCustomFragment")
         }
 
         var played = false
@@ -126,7 +118,7 @@ class DetailVerset(val verset: Verset) : Fragment(R.layout.fragment_detail_verse
     response.enqueue(object : Callback<AyaResponse>{
         override fun onResponse(call: Call<AyaResponse>, response: Response<AyaResponse>) {
             val res = response.body()
-            ayaEng.text = res!!.result?.translate?.text
+            ayaEng.text = res?.result?.translate?.text
 
         }
         //failer of AyaResponse
@@ -236,7 +228,7 @@ class DetailVerset(val verset: Verset) : Fragment(R.layout.fragment_detail_verse
             e.printStackTrace();
         }
         // below line is use to display a toast message.
-        Toast.makeText(requireContext(),"Audio started playing..", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(),"تم تشغيل القراءة...", Toast.LENGTH_SHORT).show()
 
     }
 

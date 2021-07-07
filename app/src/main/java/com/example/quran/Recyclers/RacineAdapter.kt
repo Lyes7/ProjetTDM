@@ -3,6 +3,7 @@ package com.example.quran.Recyclers
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Filter
 import com.example.quran.DataBase.ServiceRoom
 import android.widget.Filterable
@@ -29,8 +30,6 @@ class RacineAdapter(var msg: List<Racine>):RecyclerView.Adapter<RacineAdapter.Vi
 
     private  var dataSet= arrayListOf<Racine>()
 
-
-
     init {
         dataSet.addAll(msg)
         racinesFilterList = dataSet
@@ -41,6 +40,7 @@ class RacineAdapter(var msg: List<Racine>):RecyclerView.Adapter<RacineAdapter.Vi
         var id: TextView = itemView.findViewById(R.id.idRacine)
         var title: TextView = itemView.findViewById(R.id.racineTv)
         var len: TextView = itemView.findViewById(R.id.lenRacine)
+
 
     }
 
@@ -63,8 +63,10 @@ class RacineAdapter(var msg: List<Racine>):RecyclerView.Adapter<RacineAdapter.Vi
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val activity = v!!.context as AppCompatActivity
+                if( getItemCount() != dataSet.size ){
+                    ServiceRoom.database.historicRacineDao().insertHistRacine(HistoricRacine(racinesFilterList[position].idRacine))
+                }
 
-               ServiceRoom.database.historicRacineDao().insertHistRacine(HistoricRacine(racinesFilterList[position].idRacine))
 
                 val ayaFragment = RvAyaFragment(racinesFilterList[position])
 

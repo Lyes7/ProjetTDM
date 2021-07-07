@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.quran.DataBase.AppDataBase
 import com.example.quran.Fragment.DetailVerset
+import com.example.quran.Fragment.HistoricFragment
 import com.example.quran.Fragment.RvAyaFragment
+import com.example.quran.Fragment.SavedRvFragment
 import com.example.quran.Models.HistoricRacine
 import com.example.quran.Models.Racine
 import com.example.quran.Models.SavedVerset
@@ -27,10 +29,7 @@ import kotlin.collections.ArrayList
 class LocalSavedAdapter(context : Context):RecyclerView.Adapter<LocalSavedAdapter.ViewHolder>() {
 
 
-    private var msg = listOf<SavedVerset>(
-        SavedVerset(0,"1:1","ملاحظة رائعة"),
-        SavedVerset(1,"1:2","ملاحظة رائعة  جدا ")
-    )
+    private var msg = ServiceRoom.database.savedVersetDao()?.getSavedVersets()
 
 
     private  var dataSet= arrayListOf<SavedVerset>()
@@ -46,6 +45,7 @@ class LocalSavedAdapter(context : Context):RecyclerView.Adapter<LocalSavedAdapte
         var title: TextView = itemView.findViewById(R.id.SuraName)
         var ayah: TextView = itemView.findViewById(R.id.AyaTv)
         var note: TextView = itemView.findViewById(R.id.note)
+        var deletBtn: TextView = itemView.findViewById(R.id.deletBtn)
 
     }
 
@@ -66,6 +66,16 @@ class LocalSavedAdapter(context : Context):RecyclerView.Adapter<LocalSavedAdapte
         holder.title.text = "سورة "+ServiceRoom.database.surahDao()?.getSurahById(targetAya.IdSourat)?.get(0)?.NomSourat
         holder.ayah.text = targetAya.Text_AR
         holder.note.text = dataSet!![position].note
+        holder.deletBtn.setOnClickListener {
+            ServiceRoom.database.savedVersetDao()?.deleteSavedVersetByNote(dataSet!![position].IdAya,dataSet!![position].note)
+            val savedRvAyaFragment = SavedRvFragment()
+
+            val activity = it!!.context as AppCompatActivity
+            activity.supportFragmentManager.beginTransaction().apply {
+                replace(R.id.savedFragment,  savedRvAyaFragment)
+                commit()
+            }
+        }
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val activity = v!!.context as AppCompatActivity
@@ -73,7 +83,7 @@ class LocalSavedAdapter(context : Context):RecyclerView.Adapter<LocalSavedAdapte
                 val detailFragment = DetailVerset(targetAya)
 
                 activity.supportFragmentManager.beginTransaction().apply {
-                    replace(R.id.flFragment,  detailFragment)
+                    replace(R.id.savedFragment,  detailFragment)
                     addToBackStack(null)
                     commit()
                 }
