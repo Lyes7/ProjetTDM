@@ -16,6 +16,9 @@ interface VersetDao {
     @Query("SELECT * FROM Verset WHERE NumAya == :NumAya")
     fun getVersetByNumAya(NumAya: Int): List<Verset>
 
+    @Query("SELECT * FROM Verset WHERE IdAya == :IdAya")
+    fun getVersetByNumId(IdAya: String): Verset
+
     @Query("SELECT * FROM Verset")
     fun getVersets(): List<Verset>
 

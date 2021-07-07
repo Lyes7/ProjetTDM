@@ -10,6 +10,8 @@ import com.example.quran.R
 import com.example.quran.Fragment.RvRacineFragment
 import com.example.quran.Models.Racine
 import com.example.quran.DataBase.ServiceRoom
+import com.example.quran.Fragment.BookMarkFragment
+import com.example.quran.Fragment.SavedRvFragment
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -23,12 +25,23 @@ class MainActivity : AppCompatActivity(){
 
         history.setOnClickListener {
 
-            val histRacineFragment =HistoricFragment()
+            val histRacineFragment = HistoricFragment()
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.flFragment,  histRacineFragment)
                 addToBackStack(null)
                 commit()
             }
+        }
+
+        mark.setOnClickListener{
+            val bookMarkFrag = BookMarkFragment()
+
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flFragment,  bookMarkFrag)
+                addToBackStack(null)
+                commit()
+            }
+
         }
 
 
